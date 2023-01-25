@@ -8,7 +8,7 @@ const methodOverride = require('method-override')
 
 mongoose.connect("mongodb+srv://user:pass123@cluster0.avm9sgy.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true }
 ).then(() => console.log("Database Connection succesful")).catch(() => console.log("error"))
-
+app.listen(process.env.PORT || 5000)
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true }))
@@ -59,5 +59,5 @@ app.delete('/products/:id', async (req, res) => {
 })
 
 
-app.listen(process.env.PORT || 5000)
+
 
