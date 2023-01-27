@@ -3,18 +3,15 @@ const mongoose = require("mongoose");
 const app = express();
 const Product = require("./models/product");
 const methodOverride = require("method-override");
-
-mongoose.connect("mongodb+srv://user:pass123@cluster0.avm9sgy.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true }
+  mongoose.connect("mongodb+srv://user:pass123@cluster0.avm9sgy.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true }
 ).then(() => console.log("Database Connection succesful")).catch(err => console.log("error: ", err))
-
-app.listen(process.env.PORT || 5000);
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 app.get("/", async (req, res) => {
-  res.send("Hello");
+  res.redirect("/products/")
 });
 
 app.get("/products", async (req, res) => {
@@ -58,3 +55,6 @@ app.delete("/products/:id", async (req, res) => {
 await Product.findByIdAndDelete(id);
 res.redirect("/products");
 });
+
+
+app.listen(process.env.PORT || 5000);
